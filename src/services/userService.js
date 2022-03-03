@@ -30,7 +30,7 @@ module.exports = {
 
   insert: (name, email, password) => {
     return new Promise((resolve, reject) => {
-      db.query('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', 
+      db.query('INSERT INTO users (name, email, password) VALUES (?, ?, PASSWORD(?))', 
                               [name, email, password], (error, results) => {
         if (error) { 
           reject(error); console.log(error); return; 
@@ -43,7 +43,7 @@ module.exports = {
 
   update: (code, name, email, password) => {
     return new Promise((resolve, reject) => {
-      db.query('UPDATE users SET name = ?, email = ?, password = ? WHERE code = ?', 
+      db.query('UPDATE users SET name = ?, email = ?, password = PASSWORD(?) WHERE code = ?', 
                               [name, email, password, code], (error, results) => {
         if (error) { 
           reject(error); return; 

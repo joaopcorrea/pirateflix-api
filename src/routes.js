@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
+const auth = require('./middlewares/auth');
+
 const statusController = require('./controllers/statusController');
 const loginController = require('./controllers/loginController');
-
-const auth = require('./middlewares/auth');
 
 const userController = require('./controllers/userController');
 
 // router.get('/status', statusController.getStatus);
 
-// router.get('/login', loginController.login);
+router.post('/login', loginController.login);
+
+router.use(auth);
 
 router.get('/users', userController.getAll);
 router.get('/users/:code', userController.getSingle);

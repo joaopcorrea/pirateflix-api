@@ -25,7 +25,11 @@ module.exports = {
     let user = await userService.getSingle(code);
 
     if (user) {
-      json.content = user;
+      json.content = {
+        code: user.code,
+        name: user.name,
+        email: user.email
+      };
       res.status(OK).json(json);
     } else {
       json.message = "Usuário não encontrado";
@@ -57,8 +61,7 @@ module.exports = {
       json.content = {
         code,
         name,
-        email,
-        password
+        email
       };
       res.status(CREATED).json(json);
     } else {
@@ -96,8 +99,7 @@ module.exports = {
       json.content = {
         code,
         name,
-        email,
-        password
+        email
       };
       res.status(OK).json(json);
     } else {
